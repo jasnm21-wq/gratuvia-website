@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gratuvia | Track tips, shifts, and pay privately</title>
-  <meta name="description" content="Gratuvia keeps tips, shifts, wages, schedules, paycheck estimates, and tip-slip records on your phone. The current Android build runs OCR on-device." />
+  <title>Gratuvia | Tip, shift, and paycheck tracking</title>
+  <meta name="description" content="Gratuvia tracks tips, shifts, wages, schedules, paycheck estimates, and tip-slip records. The Android build stores core records locally and runs OCR on the phone." />
   <link rel="canonical" href="https://gratuvia.app/" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/styles.css" />
@@ -29,12 +29,12 @@
     <section class="hero">
       <div class="shell hero-grid">
         <div>
-          <span class="eyebrow">Tip and pay tracking for tipped workers</span>
-          <h1>Track what you made.<br><span>Keep the record on your phone.</span></h1>
-          <p class="hero-copy">Gratuvia keeps tips, shifts, hourly wages, schedules, paycheck estimates, and tip slips in one place. The current Android build stores core records locally and runs OCR on the phone, so scanning a tip slip does not require a cloud OCR service.</p>
+          <span class="eyebrow">Built for people who work for tips</span>
+          <h1>Track your tips.<br><span>Check the paycheck they turn into.</span></h1>
+          <p class="hero-copy">Gratuvia keeps your shifts, tips, hourly wages, schedule, paycheck estimates, and tip slips in one work history. The Android build stores the main record on your phone. Its OCR also runs on the phone, so scanning a tip slip does not require a cloud OCR service.</p>
           <div class="hero-actions">
-            <a class="button primary" href="#features">See the features</a>
-            <a class="button secondary" href="/trust/">Read the privacy details</a>
+            <a class="button primary" href="#features">See what it tracks</a>
+            <a class="button secondary" href="/trust/">See how the data is stored</a>
           </div>
           <p class="microcopy">The Android beta is being prepared now. iOS is planned after the Android release is stable.</p>
         </div>
@@ -42,16 +42,16 @@
         <div class="hero-card" aria-label="Gratuvia overview">
           <div class="phone-bar"><span></span><span></span><span></span></div>
           <div class="stat-row">
-            <div><small>Shift record</small><strong>Saved locally</strong></div>
+            <div><small>Shift record</small><strong>Saved on device</strong></div>
             <div class="pill">On-device OCR</div>
           </div>
           <div class="mini-chart" aria-hidden="true">
             <i style="height:42%"></i><i style="height:68%"></i><i style="height:55%"></i><i style="height:83%"></i><i style="height:64%"></i><i style="height:92%"></i><i style="height:74%"></i>
           </div>
           <div class="card-grid">
-            <div class="mini-card"><small>Hourly average</small><b>Calculated from shifts</b></div>
-            <div class="mini-card"><small>Paycheck</small><b>Estimated from your settings</b></div>
-            <div class="mini-card wide"><small>Tip slip</small><b>Original kept on your device</b></div>
+            <div class="mini-card"><small>Hourly average</small><b>Calculated from saved shifts</b></div>
+            <div class="mini-card"><small>Paycheck</small><b>Estimated from your payroll settings</b></div>
+            <div class="mini-card wide"><small>Tip slip</small><b>Original image kept with the record</b></div>
           </div>
         </div>
       </div>
@@ -60,26 +60,56 @@
     <section class="proof-strip">
       <div class="shell proof-grid">
         <div><strong>Local-first records</strong><span>Shifts, tips, schedules, and payroll settings work from device storage.</span></div>
-        <div><strong>On-device OCR</strong><span>The current Android build uses bundled native OCR models.</span></div>
-        <div><strong>Encrypted database</strong><span>Core structured records are stored in SQLCipher-protected SQLite.</span></div>
-        <div><strong>Encrypted exports</strong><span>Portable backups use AES-256-GCM with a separate recovery key.</span></div>
+        <div><strong>OCR on the phone</strong><span>The Android build includes the OCR models inside the app.</span></div>
+        <div><strong>SQLCipher storage</strong><span>Structured records are kept in a SQLCipher-protected SQLite database.</span></div>
+        <div><strong>AES-256-GCM backups</strong><span>Portable backups are encrypted before you save or transfer them.</span></div>
       </div>
     </section>
 
     <section class="section" id="features">
       <div class="shell">
         <div class="section-heading">
-          <span class="eyebrow">What Gratuvia keeps together</span>
-          <h2>Your shift, your tips, and the paycheck they turn into.</h2>
-          <p>A tipped worker can end up with a schedule in one app, tip slips in the camera roll, wages in a note, and paycheck math in a calculator. Gratuvia keeps those records tied to the same work history.</p>
+          <span class="eyebrow">Work records in one place</span>
+          <h2>One shift can affect your tips, hourly pay, and paycheck estimate.</h2>
+          <p>Gratuvia ties those records together. You do not have to keep the schedule in one app, tip slips in the camera roll, wage notes somewhere else, and paycheck math in a calculator.</p>
         </div>
+
         <div class="feature-grid">
-          <article class="feature-card"><span class="icon">$</span><h3>Tips & shifts</h3><p>Record gratuities, shift times, tip sharing, positions, employers, and hourly wages. Gratuvia uses those records to calculate earnings over time.</p></article>
-          <article class="feature-card"><span class="icon">⌁</span><h3>Tip-slip scanning</h3><p>Scan a supported tip slip with OCR that runs on the phone. Review the amount before saving it, and keep the original image with the record.</p></article>
-          <article class="feature-card"><span class="icon">▦</span><h3>Schedule & calendar</h3><p>Create recurring schedules, use different hours on different days, and edit or delete one scheduled shift without rewriting the whole week.</p></article>
-          <article class="feature-card"><span class="icon">≈</span><h3>Paycheck estimates</h3><p>Estimate take-home pay from hourly wages, recorded tips, taxes, deductions, and retirement contributions you enter.</p></article>
-          <article class="feature-card"><span class="icon">↺</span><h3>Paycheck history</h3><p>Keep a snapshot for each pay period instead of replacing the old estimate. Actual pay-stub amounts can later be compared with the estimate.</p></article>
-          <article class="feature-card"><span class="icon">↗</span><h3>Earnings history</h3><p>Review daily, weekly, monthly, day-of-week, hourly, YTD, and annual totals from the shifts and gratuities you recorded.</p></article>
+          <article class="feature-card">
+            <span class="icon">$</span>
+            <h3>Tips & shifts</h3>
+            <p>Record gratuities, shift times, tip sharing, positions, employers, and hourly wages. Gratuvia calculates earnings from the records you save.</p>
+          </article>
+
+          <article class="feature-card">
+            <span class="icon">⌁</span>
+            <h3>Tip-slip scanning</h3>
+            <p>Scan a supported tip slip with OCR that runs on the phone. Review the fields before saving them. The original image stays attached to the record.</p>
+          </article>
+
+          <article class="feature-card">
+            <span class="icon">▦</span>
+            <h3>Schedule & calendar</h3>
+            <p>Create recurring schedules, set different hours for different days, and change one scheduled shift without rebuilding the whole week.</p>
+          </article>
+
+          <article class="feature-card">
+            <span class="icon">≈</span>
+            <h3>Paycheck estimates</h3>
+            <p>Estimate take-home pay from hourly wages, recorded tips, tax settings, deductions, and retirement contributions you enter.</p>
+          </article>
+
+          <article class="feature-card">
+            <span class="icon">↺</span>
+            <h3>Paycheck history</h3>
+            <p>Save a snapshot for each pay period instead of replacing the previous estimate. Actual pay-stub amounts can be compared with the estimate later.</p>
+          </article>
+
+          <article class="feature-card">
+            <span class="icon">↗</span>
+            <h3>Earnings history</h3>
+            <p>Review daily, weekly, monthly, day-of-week, hourly, YTD, and annual totals from the shifts and gratuities you recorded.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -87,23 +117,26 @@
     <section class="section privacy-callout">
       <div class="shell split-card">
         <div>
-          <span class="eyebrow">Local-first by design</span>
-          <h2>Your earnings history can stay on your device.</h2>
+          <span class="eyebrow">Local-first storage</span>
+          <h2>Your work history does not need to live on our server.</h2>
         </div>
         <div>
-          <p>Gratuvia's core record system does not need cloud processing. Shifts, gratuities, schedules, payroll settings, OCR reviews, and original tip-slip images remain usable from the phone.</p>
-          <a class="text-link" href="/trust/">See how the local storage and OCR work →</a>
+          <p>The Android build keeps shifts, gratuities, schedules, payroll settings, OCR reviews, and original tip-slip images usable from the phone. A network connection is not required for that core record system.</p>
+          <a class="text-link" href="/trust/">Read the storage, OCR, and backup details →</a>
         </div>
       </div>
     </section>
 
     <section class="section compact-section">
       <div class="shell legal-preview">
-        <div><span class="eyebrow">Policies and support</span><h2>Privacy, terms, and support are public.</h2></div>
+        <div>
+          <span class="eyebrow">Policies & support</span>
+          <h2>Read what Gratuvia stores and what its estimates mean.</h2>
+        </div>
         <div class="legal-links">
-          <a href="/privacy/"><strong>Privacy Policy</strong><span>What stays on the device, what can leave it, and what Prokvik receives.</span></a>
-          <a href="/terms/"><strong>Terms of Service</strong><span>Rules for OCR, estimates, backups, subscriptions, and beta software.</span></a>
-          <a href="/support/"><strong>Support</strong><span>Report a bug, ask a privacy question, or get help with Gratuvia.</span></a>
+          <a href="/privacy/"><strong>Privacy Policy</strong><span>What stays on the phone, what can leave it, and what Prokvik receives.</span></a>
+          <a href="/terms/"><strong>Terms of Service</strong><span>Rules for OCR, paycheck estimates, backups, subscriptions, and beta software.</span></a>
+          <a href="/support/"><strong>Support</strong><span>Report a bug, ask a privacy question, or get help with a Gratuvia record.</span></a>
         </div>
       </div>
     </section>
