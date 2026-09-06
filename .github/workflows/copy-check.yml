@@ -1,0 +1,16 @@
+name: Copy check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check-copy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Check public page copy
+        run: node scripts/check-copy.mjs
