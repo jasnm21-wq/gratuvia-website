@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Privacy & Security | Gratuvia</title>
-  <meta name="description" content="How Gratuvia stores core earnings records locally, runs OCR on-device, preserves original tip-slip images, and creates encrypted backups." />
+  <meta name="description" content="Technical details for Gratuvia local storage, on-device OCR, SQLCipher, SHA-256 file checks, and AES-256-GCM backups." />
   <link rel="canonical" href="https://gratuvia.app/trust/" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/styles.css" />
@@ -12,48 +12,85 @@
 </head>
 <body>
   <header class="site-header"><div class="shell nav-wrap"><a class="brand" href="/"><span class="brand-mark">G</span><span>Gratuvia</span></a><nav class="nav" aria-label="Primary navigation"><a href="/support/">Support</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav></div></header>
+
   <main>
-    <section class="page-hero"><div class="page-shell"><span class="eyebrow">Privacy & Security</span><h1>The phone holds the core record.</h1><p>Gratuvia's current mobile architecture keeps shifts, tips, schedules, payroll settings, OCR reviews, and original tip-slip records on the device. Those core features do not depend on a company server or cloud OCR service.</p></div></section>
+    <section class="page-hero">
+      <div class="page-shell">
+        <span class="eyebrow">Privacy & Security</span>
+        <h1>How Gratuvia stores and processes your records</h1>
+        <p>The Android build keeps its main work and earnings record on the device. Tip-slip OCR also runs on the phone. This page lists the storage, file-integrity, and backup mechanisms behind those claims.</p>
+      </div>
+    </section>
 
     <section class="page-shell legal-document">
       <div class="trust-grid">
-        <article class="trust-card"><strong>Local-first records</strong><p>Core earnings, schedules, payroll settings, OCR reviews, and tip-slip records work from local device storage without a network connection.</p></article>
-        <article class="trust-card"><strong>On-device OCR</strong><p>The current Android build uses a private native OCR module with models bundled into the app. Recognition runs on the phone.</p></article>
-        <article class="trust-card"><strong>SQLCipher database</strong><p>Core structured records are stored in a SQLCipher-protected SQLite database. The database key is generated on the device and kept in platform secure storage.</p></article>
-        <article class="trust-card"><strong>Original tip slips</strong><p>Gratuvia keeps the original selected or captured tip-slip image separately. OCR can create temporary working images without rewriting the original file.</p></article>
-        <article class="trust-card"><strong>SHA-256 integrity checks</strong><p>Original tip-slip files are hashed with SHA-256. Gratuvia can use that hash to verify an imported or restored file against the saved record.</p></article>
-        <article class="trust-card"><strong>AES-256-GCM backups</strong><p>Portable backups are encrypted on the device with AES-256-GCM. The recovery key is kept separate from the backup file.</p></article>
+        <article class="trust-card">
+          <strong>Local-first records</strong>
+          <p>Shifts, tips, schedules, payroll settings, OCR reviews, and tip-slip records work from device storage without a network connection.</p>
+        </article>
+
+        <article class="trust-card">
+          <strong>On-device OCR</strong>
+          <p>The Android build includes a private native OCR module and its recognition models inside the app. The OCR pass runs on the phone.</p>
+        </article>
+
+        <article class="trust-card">
+          <strong>SQLCipher database</strong>
+          <p>Structured records are stored in a SQLCipher-protected SQLite database. The database key is generated on the device and stored with the platform's secure-storage system.</p>
+        </article>
+
+        <article class="trust-card">
+          <strong>Original tip-slip files</strong>
+          <p>Gratuvia keeps the original selected or captured image separately from OCR working files. A recognition pass can crop or transform a working copy without rewriting the original.</p>
+        </article>
+
+        <article class="trust-card">
+          <strong>SHA-256 file checks</strong>
+          <p>Original tip-slip files are hashed with SHA-256. Gratuvia can compare that hash with an imported or restored file to check whether the bytes match the saved record.</p>
+        </article>
+
+        <article class="trust-card">
+          <strong>AES-256-GCM backups</strong>
+          <p>Portable backups are encrypted on the device with AES-256-GCM. The recovery key is stored separately from the encrypted backup file.</p>
+        </article>
       </div>
 
       <section>
         <h2>Local-first storage</h2>
-        <p>Local-first means the app can do its main job without sending every record to a remote database. You can track shifts, tips, wages, schedules, payroll settings, OCR reviews, and original tip slips from the phone itself.</p>
-        <p>That control comes with responsibility. If the only copy of a record is on one phone and that phone is lost or erased, Prokvik cannot recover a copy it never received. The encrypted backup feature exists so you can keep another copy in a location you choose.</p>
+        <p>The main tracking workflow does not require a remote database. A user can record shifts, tips, wages, schedules, payroll settings, OCR reviews, and original tip slips from the phone itself.</p>
+        <p>That also limits what Prokvik can recover. If a record exists only on one phone and that phone is lost or erased, Prokvik does not have a server copy to restore. The portable backup feature gives you a second encrypted copy that you can store somewhere else.</p>
       </section>
 
       <section>
-        <h2>OCR review before saving</h2>
-        <p>OCR does not write directly into your earnings history as a trusted fact. The OCR engine reads the image, the parser finds likely fields, and Gratuvia shows the result for review.</p>
-        <p>Supported templates can use targeted recognition passes for fields such as tip amounts. The original image remains separate from those working copies.</p>
+        <h2>OCR review before a record is saved</h2>
+        <p>The OCR engine reads the image. The parser identifies likely fields. Gratuvia then shows the result for review before it becomes part of the saved earnings history.</p>
+        <p>Supported document templates can run targeted recognition passes for fields such as tip amounts. Those working passes do not replace the original image stored with the record.</p>
       </section>
 
       <section>
-        <h2>Optional online services</h2>
-        <p>Gratuvia may add optional account, sync, or backup services later. Those services are not required for the current core tracking workflow.</p>
-        <p>If a future feature sends personal data to Prokvik or another service provider, the <a class="text-link" href="/privacy/">Privacy Policy</a> and the related in-app disclosure will be updated before that feature depends on the new processing.</p>
+        <h2>Portable backup format</h2>
+        <p>Gratuvia encrypts a portable backup before the file leaves the device. AES-256-GCM protects the backup contents, and the recovery key is kept separate from the encrypted file.</p>
+        <p>You choose the storage location. Saving the encrypted file to iCloud Drive, Google Drive, Dropbox, OneDrive, a NAS, or another provider does not give Prokvik the recovery key.</p>
       </section>
 
       <section>
-        <h2>Security claims</h2>
-        <p>No app can promise perfect security. Gratuvia does not claim to be unhackable. We also will not call the system zero-knowledge or end-to-end encrypted unless the implementation and a security review support those exact terms.</p>
+        <h2>Optional online features</h2>
+        <p>Future releases can add optional account, sync, or backup services. Those services are not required for the current local tracking workflow.</p>
+        <p>If a new feature sends a new category of personal data to Prokvik or another provider, the <a class="text-link" href="/privacy/">Privacy Policy</a> and the related in-app disclosure will be updated before that feature depends on the new processing.</p>
+      </section>
+
+      <section>
+        <h2>Limits of the security claims</h2>
+        <p>No app can promise perfect security. Gratuvia does not claim to be unhackable. We also do not describe the system as zero-knowledge or end-to-end encrypted unless the implementation and a security review support those exact terms.</p>
       </section>
 
       <section>
         <h2>Security reports</h2>
-        <p>If you find a security or privacy issue, email <a class="text-link" href="mailto:admin@prokvik.com?subject=Gratuvia%20Security">admin@prokvik.com</a>. Do not include sensitive user records unless the records are needed to explain the problem.</p>
+        <p>Email security or privacy reports to <a class="text-link" href="mailto:admin@prokvik.com?subject=Gratuvia%20Security">admin@prokvik.com</a>. Include the Gratuvia version, device model, and steps that reproduce the problem when those details are available. Do not attach a pay stub or tip-slip image unless the file is needed to show the issue.</p>
       </section>
     </section>
   </main>
+
   <footer class="site-footer"><div class="shell footer-grid"><div><a class="brand footer-brand" href="/"><span class="brand-mark">G</span><span>Gratuvia</span></a><p>A Prokvik LLC product.</p></div><div class="footer-links"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/trust/">Privacy & Security</a><a href="/support/">Support</a></div><div class="footer-meta">© 2026 Prokvik LLC. All rights reserved.</div></div></footer>
 </body>
 </html>
