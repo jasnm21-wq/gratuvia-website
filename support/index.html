@@ -7,8 +7,10 @@
   <meta name="description" content="Gratuvia support for bug reports, OCR problems, privacy questions, backups, and paycheck-estimate questions." />
   <link rel="canonical" href="https://gratuvia.app/support/" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="/site.webmanifest" />
   <link rel="stylesheet" href="/styles.css" />
   <meta name="theme-color" content="#0a0f1a" />
+  <meta name="application-name" content="Gratuvia" />
 </head>
 <body>
   <header class="site-header"><div class="shell nav-wrap"><a class="brand" href="/"><span class="brand-mark">G</span><span>Gratuvia</span></a><nav class="nav" aria-label="Primary navigation"><a href="/trust/">Privacy & Security</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav></div></header>
@@ -58,6 +60,11 @@
           </details>
 
           <details>
+            <summary>Can Gratuvia compare its estimate with my real paycheck?</summary>
+            <p>Yes. The current Android beta can save actual paycheck amounts for a pay period and compare them with Gratuvia's saved estimate so you can see the differences.</p>
+          </details>
+
+          <details>
             <summary>Where are my records stored?</summary>
             <p>The Android build stores its main work and earnings record on the phone. Structured records use a SQLCipher-protected SQLite database. Original tip-slip images are kept separately in private app storage. The <a class="text-link" href="/trust/">Privacy & Security</a> page lists the storage and backup details.</p>
           </details>
@@ -74,7 +81,7 @@
 
           <details>
             <summary>Is Gratuvia available on iPhone?</summary>
-            <p>Not yet. The Android beta is being prepared first. iOS is planned after the Android release is stable.</p>
+            <p>Not yet. The Android beta is now in active device testing. iOS is planned after the Android build is stable.</p>
           </details>
         </div>
       </section>
