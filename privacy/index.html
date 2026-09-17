@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Privacy Policy | Gratuvia</title>
-  <meta name="description" content="Gratuvia Privacy Policy covering local storage, on-device OCR, backups, support data, and website requests." />
+  <meta name="description" content="Gratuvia Privacy Policy covering local storage, on-device OCR, optional accounts, encrypted cloud sync, backups, support data, and website requests." />
   <link rel="canonical" href="https://gratuvia.app/privacy/" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/styles.css" />
@@ -23,13 +23,13 @@
       <div class="page-shell">
         <span class="eyebrow">Legal</span>
         <h1>Privacy Policy</h1>
-        <p>The Android build keeps its main work and earnings record on the phone. This policy explains what stays there, what can leave the device, and what Prokvik LLC receives.</p>
-        <div class="meta-row"><span>Effective: September 5, 2026</span><span>Last updated: September 5, 2026</span></div>
+        <p>Gratuvia is local-first. Its main work and earnings record can stay on your device, while an optional account can add encrypted sync and recovery across devices. This policy explains what stays local, what can leave the device, and what Prokvik LLC or its service providers receive.</p>
+        <div class="meta-row"><span>Effective: September 16, 2026</span><span>Last updated: September 16, 2026</span></div>
       </div>
     </section>
 
     <article class="page-shell legal-document">
-      <div class="notice"><strong>Short version:</strong> Gratuvia stores core earnings records and original tip-slip images on the device. OCR runs on the phone in the current Android build. Prokvik does not sell personal information, and the current app does not contain behavioral advertising SDKs.</div>
+      <div class="notice"><strong>Short version:</strong> Gratuvia stores core earnings records and original tip-slip and paystub images on the device. OCR runs on the phone in the current Android build. Accounts and cloud sync are optional. When sync is enabled, Gratuvia encrypts the synced records and original images on the device before upload. Prokvik does not sell personal information, and the current app does not contain behavioral advertising SDKs.</div>
 
       <section>
         <h2>1. Company</h2>
@@ -39,20 +39,20 @@
 
       <section>
         <h2>2. Records stored on the device</h2>
-        <p>Gratuvia can store employers, positions, hourly wage rates, schedules, worked shifts, breaks, tips, tokes, gratuities, tip-share amounts, payroll settings, deductions, retirement settings, pay periods, paycheck estimates, paycheck-history snapshots, and app preferences on the device.</p>
-        <p>Tip-slip records can also contain the original image, image metadata, OCR text, confidence data, parser results, and corrections you confirm. The phone is the source of truth for these core records in the current local-first build.</p>
+        <p>Gratuvia can store employers, positions, hourly wage rates, schedules, worked shifts, breaks, tips, tokes, gratuities, tip-share amounts, payroll settings, deductions, retirement settings, pay periods, paycheck estimates, paycheck-history snapshots, actual paycheck information, and app preferences on the device.</p>
+        <p>Tip-slip and paystub records can also contain the original image, image metadata, OCR text, confidence data, parser results, and corrections you confirm. Gratuvia remains usable without creating an account or enabling cloud sync.</p>
       </section>
 
       <section>
         <h2>3. OCR and original images</h2>
-        <p>The Android build processes supported tip slips with OCR that runs on the phone. The app can create temporary crops or working images for recognition. It keeps the original selected or captured image as a separate record.</p>
-        <p>OCR does not become a trusted earnings entry by itself. You review the result before saving it. If the local OCR engine is unavailable, the core OCR path does not silently send the image to a cloud OCR service.</p>
+        <p>The Android build processes supported tip slips and paystubs with OCR that runs on the phone. The app can create temporary crops or working images for recognition. It keeps the original selected or captured image as a separate private record.</p>
+        <p>OCR does not become a trusted earnings or payroll entry by itself. You review the result before saving it. If the local OCR engine is unavailable, the core OCR path does not silently send the image to a cloud OCR service.</p>
       </section>
 
       <section>
         <h2>4. Local database and file protection</h2>
         <p>Structured records are stored in a SQLCipher-protected SQLite database. The database key is generated on the device and stored with the platform's secure-storage system.</p>
-        <p>Original tip-slip files are kept in the app's private document storage and hashed with SHA-256. Gratuvia can compare that hash with an imported or restored file to check whether the bytes match the saved record.</p>
+        <p>Original tip-slip and paystub files are kept in the app's private document storage and hashed with SHA-256. Gratuvia can compare that hash with an imported, synced, or restored file to check whether the bytes match the saved record.</p>
         <p>No app can guarantee perfect security. Device protection also depends on the operating system, passcode settings, backups, malware exposure, and physical access to the phone.</p>
       </section>
 
@@ -60,69 +60,88 @@
         <h2>5. Portable backups</h2>
         <p>Gratuvia can create a portable backup encrypted on the device with AES-256-GCM. The recovery key is separate from the encrypted backup file.</p>
         <p>You choose where to save the exported file. If you place it in iCloud Drive, Google Drive, Dropbox, OneDrive, a NAS, or another storage service, that provider handles the encrypted file under its own terms and privacy policy. Saving the file there does not give Prokvik the recovery key.</p>
-        <p><strong>Keep the recovery key.</strong> Prokvik cannot recover a backup if the key needed to decrypt it is lost.</p>
+        <p><strong>Keep the recovery key.</strong> Prokvik cannot recover a portable backup if the key needed to decrypt it is lost.</p>
       </section>
 
       <section>
-        <h2>6. Data Prokvik can receive</h2>
+        <h2>6. Optional Gratuvia accounts</h2>
+        <p>You can use Gratuvia without an account. If you choose to create one, Gratuvia uses an email address and password for authentication. The authentication service assigns a user ID to the account and processes the credentials needed to create the account, sign in, reset a password, and delete the account. Passwords are not stored by Prokvik in readable form.</p>
+        <p>Gratuvia currently uses Supabase as a service provider for account authentication, database services, and encrypted sync storage. Data sent to these services is transferred over an encrypted connection.</p>
+        <p>Gratuvia also creates a random app-installation identifier used for sync state and conflict handling. It is an app-generated identifier, not a hardware serial number.</p>
+      </section>
+
+      <section>
+        <h2>7. Optional encrypted cloud sync</h2>
+        <p>If you enable Account &amp; sync, Gratuvia encrypts the structured Gratuvia data on your device with an account vault key before uploading the sync payload. The readable earnings, payroll, schedule, and other synced record contents are not uploaded as plaintext.</p>
+        <p>Original tip-slip and paystub images included in sync are also encrypted on the device before upload and stored as private encrypted objects. Gratuvia verifies image hashes and file sizes when restoring them to another device.</p>
+        <p>The cloud service can store encrypted payloads, encrypted image objects, account identifiers, sync revision information, and related service metadata needed to provide the feature. The account recovery key is used on your device to recover the encryption key on another device. Keep that recovery key somewhere safe.</p>
+        <p>An existing device that holds original images may need to complete a sync before a new device can restore those originals. Gratuvia is designed to reject an incomplete media restore rather than silently present missing originals as a complete recovery.</p>
+      </section>
+
+      <section>
+        <h2>8. Data Prokvik and service providers can receive</h2>
+        <h3>Account information</h3>
+        <p>If you create a Gratuvia account, the account service processes your email address, user ID, authentication information, and security or service metadata needed to operate the account. Prokvik can use account information to provide sign-in, password recovery, account support, security, and account deletion.</p>
+
+        <h3>Encrypted sync service data</h3>
+        <p>If you enable sync, the service receives the encrypted sync payload and encrypted media objects plus operational metadata such as the account identifier, app-generated device identifier, revision values, object names or hashes, timestamps, and integrity-related metadata needed to store, retrieve, and reconcile the encrypted data.</p>
+
         <h3>Support email</h3>
         <p>If you contact support, Prokvik receives what you send. That can include your email address, message, screenshots, attachments, and diagnostic details.</p>
 
         <h3>Website requests</h3>
         <p>When you open gratuvia.app, the hosting and security systems serving the site process standard request data needed to return the page and block abuse. That can include an IP address, browser or device type, requested path, timestamp, and security-related request data. The current website does not use behavioral advertising.</p>
-
-        <h3>Future online features</h3>
-        <p>Gratuvia can add optional account, sync, or backup services later without changing the local-first core into a required cloud service. If a future feature sends new categories of personal data to Prokvik or another provider, this policy and the related in-app disclosure will be updated before that feature depends on the new processing.</p>
       </section>
 
       <section>
-        <h2>7. Device permissions</h2>
-        <p>Gratuvia requests a device permission when a feature needs it. Camera or photo access is used to capture or select tip slips and pay-stub images. File or photo-library access is used when you choose to import, save, export, or share a record. Notification permission is used for reminders you enable.</p>
+        <h2>9. Device permissions</h2>
+        <p>Gratuvia requests a device permission when a feature needs it. Camera or photo access is used to capture or select tip slips and paystub images. File or photo-library access is used when you choose to import, save, export, or share a record. Notification permission is used for reminders you enable.</p>
         <p>You can change permissions in the device settings. A feature that depends on a disabled permission will stop working until that permission is restored.</p>
       </section>
 
       <section>
-        <h2>8. How Prokvik uses received data</h2>
-        <p>Prokvik uses support and website data to operate the site, answer support requests, investigate bugs, protect the service, respond to legal requests, and enforce the Terms of Service. Information you send as product feedback can also be used to fix or improve the feature you reported.</p>
+        <h2>10. How Prokvik uses received data</h2>
+        <p>Prokvik uses account, support, sync-service metadata, and website data to provide the requested service, authenticate accounts, operate encrypted sync, answer support requests, investigate bugs, protect the service, prevent abuse, respond to legal requests, and enforce the Terms of Service. Information you send as product feedback can also be used to fix or improve the feature you reported.</p>
       </section>
 
       <section>
-        <h2>9. Sale, advertising, and disclosure</h2>
+        <h2>11. Sale, advertising, service providers, and disclosure</h2>
         <p><strong>Prokvik does not sell personal information.</strong> The current Gratuvia app does not include third-party behavioral advertising SDKs.</p>
-        <p>Prokvik can disclose information it actually holds to a service provider working on Prokvik's behalf, when required by valid legal process, to protect rights or safety, or as part of a merger, acquisition, or sale of the Gratuvia business subject to applicable law.</p>
+        <p>Prokvik uses service providers, including infrastructure and authentication providers, to operate features on Prokvik's behalf. Prokvik can also disclose information it actually holds when required by valid legal process, to protect rights or safety, or as part of a merger, acquisition, or sale of the Gratuvia business subject to applicable law.</p>
       </section>
 
       <section>
-        <h2>10. Retention and deletion</h2>
+        <h2>12. Retention and deletion</h2>
         <p>Local records stay on the device until you delete them, reset the related app data, or remove the app, subject to the device's own backup behavior. An exported backup stays wherever you saved it until you delete it there.</p>
-        <p>Prokvik can retain support messages and website security records for the time needed to answer the request, investigate abuse, meet legal obligations, resolve a dispute, or enforce an agreement.</p>
-        <p>The current core app does not require an account. If a future release stores user records in a Prokvik-managed account or cloud service, Gratuvia will add the required account and data-deletion controls before that service launches.</p>
+        <p>If you created a Gratuvia account, you can permanently delete the account and its associated encrypted cloud sync data from <strong>Settings → Privacy &amp; export → Account &amp; sync</strong>. You can also find account-deletion instructions at <a class="text-link" href="/delete-account/">gratuvia.app/delete-account/</a>.</p>
+        <p>Deleting the cloud account does not remotely erase copies that exist only on your devices or in backup files you saved yourself. Those copies must be deleted from the device or storage location where they remain.</p>
+        <p>Prokvik can retain support messages, website security records, and records that must be retained for legal, fraud-prevention, dispute, tax, payment-provider, or compliance reasons for as long as reasonably necessary for those purposes.</p>
       </section>
 
       <section>
-        <h2>11. Your choices and privacy rights</h2>
-        <p>You decide whether to enter information, grant optional permissions, create an export, send support material, or use a future online feature. Local records can be deleted with the controls available in the app. Exported files must be deleted from the place where you saved them.</p>
+        <h2>13. Your choices and privacy rights</h2>
+        <p>You decide whether to enter information, grant optional permissions, create an account, enable encrypted sync, create an export, or send support material. Local records can be deleted with controls available in the app. Exported files must be deleted from the place where you saved them.</p>
         <p>Privacy law in your location can give you rights over personal information Prokvik holds, including access, correction, or deletion rights. Send a request to <a class="text-link" href="mailto:admin@prokvik.com">admin@prokvik.com</a>. Prokvik can ask for information needed to verify the request.</p>
-        <p>Prokvik cannot access, correct, or delete a record that exists only on your phone or in a backup location controlled by you.</p>
+        <p>Prokvik cannot access, correct, or delete readable record contents that exist only on your phone, in a backup location controlled by you, or only as ciphertext that Prokvik cannot decrypt without your recovery material.</p>
       </section>
 
       <section>
-        <h2>12. Children</h2>
+        <h2>14. Children</h2>
         <p>Gratuvia is not directed to children under 13. Prokvik does not knowingly collect personal information from children under 13 through the service. Contact us if you believe a child sent personal information to Prokvik.</p>
       </section>
 
       <section>
-        <h2>13. Policy changes</h2>
+        <h2>15. Policy changes</h2>
         <p>When this policy changes, the revised text will be posted at this URL with a new effective date. A material change to data collection or use will also receive any notice or consent required by law or the applicable app store.</p>
       </section>
 
       <section>
-        <h2>14. Contact</h2>
+        <h2>16. Contact</h2>
         <p><strong>Prokvik LLC</strong><br />Albuquerque, New Mexico, United States<br /><a class="text-link" href="mailto:admin@prokvik.com">admin@prokvik.com</a></p>
       </section>
     </article>
   </main>
 
-  <footer class="site-footer"><div class="shell footer-grid"><div><a class="brand footer-brand" href="/"><span class="brand-mark">G</span><span>Gratuvia</span></a><p>A Prokvik LLC product.</p></div><div class="footer-links"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/trust/">Privacy & Security</a><a href="/support/">Support</a></div><div class="footer-meta">© 2026 Prokvik LLC. All rights reserved.</div></div></footer>
+  <footer class="site-footer"><div class="shell footer-grid"><div><a class="brand footer-brand" href="/"><span class="brand-mark">G</span><span>Gratuvia</span></a><p>A Prokvik LLC product.</p></div><div class="footer-links"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/trust/">Privacy & Security</a><a href="/support/">Support</a><a href="/delete-account/">Delete account</a></div><div class="footer-meta">© 2026 Prokvik LLC. All rights reserved.</div></div></footer>
 </body>
 </html>
